@@ -13,7 +13,6 @@ Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
 Patch0:		tolua++-1.0.92-shared-library.patch
 BuildRequires:	scons
 BuildRequires:	lua-devel >= 5.1
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 tolua++ is an extended version of tolua, a tool to 
