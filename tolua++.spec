@@ -1,11 +1,12 @@
 %define apiver 5.1
 %define soname tolua++-%{apiver}
 %define libname %mklibname %{name} %{apiver}
+%define develname %mklibname %{name} -d
 
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
 Version:	1.0.92
-Release:	%mkrel 4
+Release:	%mkrel 5
 Group:		Development/Other
 License:	GPL
 URL:		http://www.codenix.com/~tolua/
@@ -28,15 +29,17 @@ Requires:	%{name} = %{version}-%{release}
 %description -n %{libname}
 Shared library for tolua++.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:        Development files for tolua++
 Group:          Development/Other
 Requires:       %{libname} = %{version}-%{release}
 Requires:       lua-devel >= 5.1
 Provides:	tolua++-devel = %{version}-%{release}
+Obsoletes:	%{mklibname %{name} 5.1}-devel < 1.0.92-5
+Provides:	%{mklibname %{name} 5.1}-devel
 
-%description -n %{libname}-devel
-Development files for tolua++
+%description -n %{develname}
+Development files for tolua++.
 
 %prep
 %setup -q
@@ -79,7 +82,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_libdir}/lib%{soname}.so
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc README doc/*
 %{_libdir}/libtolua++.so
