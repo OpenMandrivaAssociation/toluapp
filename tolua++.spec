@@ -6,7 +6,7 @@
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
 Version:	1.0.92
-Release:	%mkrel 5
+Release:	%mkrel 6
 Group:		Development/Other
 License:	GPL
 URL:		http://www.codenix.com/~tolua/
