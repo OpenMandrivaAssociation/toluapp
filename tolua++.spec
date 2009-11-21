@@ -1,17 +1,17 @@
 %define apiver 5.1
-%define soname tolua++-%{apiver}
+%define soname tolua++%{apiver}
 %define libname %mklibname %{name} %{apiver}
 %define develname %mklibname %{name} -d
 
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
-Version:	1.0.92
-Release:	%mkrel 6
+Version:	1.0.93
+Release:	%mkrel 1
 Group:		Development/Other
-License:	GPL
+License:	MIT
 URL:		http://www.codenix.com/~tolua/
 Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
-Patch0:		tolua++-1.0.92-shared-library.patch
+Source1:	custom.py
 BuildRequires:	scons
 BuildRequires:	lua-devel >= 5.1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -43,14 +43,10 @@ Development files for tolua++.
 
 %prep
 %setup -q
-%patch0 -p1
-sed -i 's/\r//' doc/%{name}.html
+cp %{SOURCE1} custom.py
 
 %build
-scons -Q CCFLAGS="%{optflags} -I%{_includedir}" tolua_lib=%{soname} LINKFLAGS="-Wl,-soname,lib%{soname}.so"
-
-#Recompile the exe without the soname. An ugly hack.
-gcc -o bin/%{name} src/bin/tolua.o src/bin/toluabind.o -Llib -l%{soname} -llua -ldl -lm
+scons -Q CCFLAGS="%{optflags}" LINKFLAGS="%{ldflags} -Wl,-soname,lib%{soname}.so"
 
 %install
 rm -rf %{buildroot}
@@ -62,7 +58,7 @@ install -m0755 bin/%{name}  %{buildroot}%{_bindir}
 install -m0755 lib/lib%{soname}.so* %{buildroot}%{_libdir}
 install -m0644 include/%{name}.h %{buildroot}%{_includedir}
 cd %{buildroot}%{_libdir}
-ln -s lib%{soname}.so.%{sover} libtolua++.so
+ln -s lib%{soname}.so libtolua++.so
 
 %clean
 rm -rf %{buildroot}
