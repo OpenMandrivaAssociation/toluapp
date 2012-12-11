@@ -79,3 +79,48 @@ cd %{buildroot}%{_libdir}
 %{_libdir}/libtolua++.so
 %{_includedir}/%{name}.h
 
+
+
+%changelog
+* Sun Jan 29 2012 Andrey Bondrov <abondrov@mandriva.org> 1.0.93-3mdv2012.0
++ Revision: 769594
+- Fix tolua++ symbol lookup error: tolua_open
+
+* Wed Dec 08 2010 Oden Eriksson <oeriksson@mandriva.com> 1.0.93-2mdv2011.0
++ Revision: 615234
+- the mass rebuild of 2010.1 packages
+
+* Sat Nov 21 2009 Funda Wang <fwang@mandriva.org> 1.0.93-1mdv2010.1
++ Revision: 468332
+- New version 1.0.93
+
+* Wed Sep 09 2009 Thierry Vignaud <tv@mandriva.org> 1.0.92-6mdv2010.0
++ Revision: 434404
+- rebuild
+
+* Mon Aug 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.92-5mdv2009.0
++ Revision: 275908
+- new devel library policy
+
+* Sun Aug 03 2008 Thierry Vignaud <tv@mandriva.org> 1.0.92-4mdv2009.0
++ Revision: 261613
+- rebuild
+
+* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 1.0.92-3mdv2009.0
++ Revision: 254681
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Fri Dec 21 2007 Olivier Blin <blino@mandriva.org> 1.0.92-1mdv2008.1
++ Revision: 136549
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Fri Jun 15 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0.92-1mdv2008.0
++ Revision: 40011
+- Import tolua++
+
