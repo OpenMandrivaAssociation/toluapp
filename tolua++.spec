@@ -6,14 +6,14 @@
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
 Version:	1.0.93
-Release:	4
+Release:	5
 Group:		Development/Other
 License:	MIT
 URL:		http://www.codenix.com/~tolua/
 Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
 Source1:	custom.py
 BuildRequires:	scons
-BuildRequires:	lua-devel >= 5.1
+BuildRequires:	lua5.1-devel >= 5.1
 
 %description
 tolua++ is an extended version of tolua, a tool to 
@@ -32,7 +32,7 @@ Shared library for tolua++.
 Summary:	Development files for tolua++
 Group:		Development/Other
 Requires:	%{libname} = %{version}-%{release}
-Requires:	lua-devel >= 5.1
+Requires:	lua5.1-devel >= 5.1
 Provides:	tolua++-devel = %{version}-%{release}
 Obsoletes:	%{mklibname %{name} 5.1}-devel < 1.0.92-5
 Provides:	%{mklibname %{name} 5.1}-devel
