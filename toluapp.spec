@@ -33,7 +33,7 @@ Shared library for tolua++.
 Summary:	Development files for tolua++
 Group:		Development/Other
 Requires:	%{libname} = %{version}-%{release}
-Requires:	luadevel >= 5.3
+Requires:	lua-devel >= 5.3
 Provides:	tolua++-devel = %{version}-%{release}
 Obsoletes:	%{mklibname %{name} %apiver}-devel < 1.0.92-5
 Provides:	%{mklibname %{name} %apiver}-devel
