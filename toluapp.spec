@@ -1,4 +1,4 @@
-%define		apiver		5.1
+%define		apiver		5.3
 %define		soname		tolua++%{apiver}
 %define		libname		%mklibname %{name} %{apiver}
 %define		develname	%mklibname %{name} -d
@@ -6,14 +6,15 @@
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
 Version:	1.0.93
-Release:	5
+Release:	6
 Group:		Development/Other
 License:	MIT
 URL:		http://www.codenix.com/~tolua/
 Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
-Source1:	custom.py
+Patch0:         tolua++-1.0.93-no-buildin-bytecode.patch
+Patch1:         tolua++-1.0.93-lua52.patch
 BuildRequires:	scons
-BuildRequires:	lua5.1-devel >= 5.1
+BuildRequires:	lua-devel >= 5.3
 
 %description
 tolua++ is an extended version of tolua, a tool to 
@@ -42,17 +43,13 @@ Development files for tolua++.
 
 %prep
 %setup -q
-%__cp %{SOURCE1} custom.py
+%apply_patches
+sed -i 's/\r//' doc/%{name}.html
 
 %build
-scons -Q CCFLAGS="%{optflags}" LINKFLAGS="%{ldflags} -Wl,-soname,lib%{soname}.so"
-# Recompile the binary without the soname. An ugly hack from Fedora.
-# We need it to fix tolua++: symbol lookup error: tolua++: undefined symbol: tolua_open
-gcc -o bin/%{name} src/bin/tolua.o src/bin/toluabind.o -Llib -l%{soname} -llua -ldl -lm
+%scons CC=%{__cc} -Q CCFLAGS="%{optflags} $(pkg-config --cflags lua)" tolua_lib=%{soname} LINKFLAGS="%{ldflags} -Wl,-soname,lib%{soname}.so" shared=1
 
 %install
-%__rm -rf %{buildroot}
-
 %__mkdir_p %{buildroot}%{_bindir}
 %__mkdir %{buildroot}%{_libdir}
 %__mkdir %{buildroot}%{_includedir}
