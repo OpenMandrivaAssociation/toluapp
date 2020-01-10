@@ -43,7 +43,7 @@ Development files for tolua++.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 sed -i 's/\r//' doc/%{name}.html
 
 %build
