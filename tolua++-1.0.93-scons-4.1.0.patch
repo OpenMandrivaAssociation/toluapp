@@ -1,0 +1,31 @@
+diff -up tolua++-1.0.93/SConstruct~ tolua++-1.0.93/SConstruct
+--- tolua++-1.0.93/SConstruct~	2008-04-21 02:05:35.000000000 +0200
++++ tolua++-1.0.93/SConstruct	2019-02-18 12:35:13.025336296 +0100
+@@ -16,7 +16,7 @@ elif 'msvc' in env['TOOLS']:
+ else:
+ 	options_file = "posix"
+ 
+-opts = Options(["config_"+options_file+".py", "custom.py", "custom_"+options_file+".py"], ARGUMENTS)
++opts = Variables(["config_"+options_file+".py", "custom.py", "custom_"+options_file+".py"], ARGUMENTS)
+ opts.Add('CC', 'The C compiler.')
+ opts.Add('CXX', 'The C++ compiler (for the tests)')
+ opts.Add('CCFLAGS', 'Flags for the compiler.', ['-O2', '-Wall'])
+@@ -65,7 +65,7 @@ def pkg_scan_dep(self, target, source):
+ 	## TODO: detectar si el archivo existe antes de abrirlo asi nomas
+ 	pkg = open(source, "rt")
+ 
+-	for linea in pkg.xreadlines():
++	for linea in pkg:
+ 		dep = re.search("^[\t\w]*\$[cphl]file\s*\"([^\"]+)\"", linea)
+ 		if dep:
+ 			self.Depends(target, '#' + dep.groups()[0]);
+diff -up tolua++-1.0.93/src/tests/SCsub~ tolua++-1.0.93/src/tests/SCsub
+--- tolua++-1.0.93/src/tests/SCsub~	2006-04-10 11:45:44.000000000 +0200
++++ tolua++-1.0.93/src/tests/SCsub	2020-02-16 14:56:46.732317614 +0100
+@@ -1,5 +1,5 @@
+ Import('env')
+-env_tests = env.Copy()
++env_tests = env.Clone()
+ 
+ env_tests.LuaBinding('tclassbind.cpp', 'tclass.pkg', 'tclass', use_own=1, use_typeid=1)
+ 
