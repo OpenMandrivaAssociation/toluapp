@@ -6,13 +6,14 @@
 Summary:	A tool to integrate C/C++ code with Lua
 Name:		tolua++
 Version:	1.0.93
-Release:	9
+Release:	10
 Group:		Development/Other
 License:	MIT
 URL:		http://www.codenix.com/~tolua/
 Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
 Patch0:         tolua++-1.0.93-no-buildin-bytecode.patch
 Patch1:         tolua++-1.0.93-lua52.patch
+Patch2:         tolua++-1.0.93-scons-4.1.0.patch
 BuildRequires:	scons
 BuildRequires:	lua-devel >= %{apiver}
 
