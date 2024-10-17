@@ -9,7 +9,7 @@ Version:	1.0.93
 Release:	11
 Group:		Development/Other
 License:	MIT
-URL:		http://www.codenix.com/~tolua/
+URL:		https://www.codenix.com/~tolua/
 Source0:	http://www.codenix.com/~tolua/%{name}-%{version}.tar.bz2
 Patch0:         tolua++-1.0.93-no-buildin-bytecode.patch
 Patch1:         tolua++-1.0.93-lua52.patch
